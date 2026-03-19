@@ -1,0 +1,447 @@
+.app-shell {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+}
+
+.ambient {
+  position: fixed;
+  inset: auto;
+  width: 34rem;
+  height: 34rem;
+  border-radius: 999px;
+  filter: blur(70px);
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+.ambient-left {
+  top: -8rem;
+  left: -8rem;
+  background: radial-gradient(circle, rgba(255, 118, 76, 0.9), rgba(255, 118, 76, 0));
+}
+
+.ambient-right {
+  right: -10rem;
+  bottom: -12rem;
+  background: radial-gradient(circle, rgba(69, 208, 255, 0.8), rgba(69, 208, 255, 0));
+}
+
+.lobby-shell,
+.dashboard-shell {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+}
+
+.lobby-shell {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+}
+
+.glass-panel,
+.glass-subpanel {
+  background: linear-gradient(145deg, rgba(17, 24, 39, 0.82), rgba(10, 16, 31, 0.68));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 80px rgba(1, 6, 18, 0.5);
+  backdrop-filter: blur(18px);
+}
+
+.glass-panel {
+  border-radius: 28px;
+}
+
+.glass-subpanel {
+  border-radius: 22px;
+}
+
+.lobby-card {
+  width: min(880px, 100%);
+  padding: 2.5rem;
+}
+
+.eyebrow-row,
+.cta-row,
+.panel-header,
+.owner-stats,
+.player-badge-row,
+.tag-row,
+.hero-summary,
+.status-stack,
+.admin-grid,
+.sales-grid,
+.squad-head,
+.bid-controls,
+.inline-field {
+  display: flex;
+  gap: 0.9rem;
+}
+
+.eyebrow-row,
+.panel-header,
+.owner-stats,
+.hero-summary,
+.status-stack,
+.squad-head {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lead {
+  max-width: 58rem;
+  color: rgba(224, 231, 255, 0.72);
+}
+
+.lobby-grid,
+.stats-grid,
+.owners-strip,
+.bottom-grid,
+.stage-grid {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.lobby-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 2rem;
+}
+
+.stage-grid {
+  grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.8fr);
+  margin-top: 1.8rem;
+}
+
+.bottom-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.5rem;
+}
+
+.owners-strip {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 1.5rem;
+}
+
+.stats-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.hero-stage,
+.owner-card,
+.bottom-grid > .glass-panel {
+  padding: 1.5rem;
+}
+
+.hero-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.hero-header h1 {
+  margin: 0.4rem 0;
+}
+
+.timer-orb {
+  width: 120px;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: radial-gradient(circle, rgba(255, 168, 90, 0.3), rgba(255, 168, 90, 0.08));
+  border: 1px solid rgba(255, 188, 127, 0.34);
+}
+
+.timer-orb span {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff3e8;
+}
+
+.timer-orb small {
+  color: rgba(255, 243, 232, 0.7);
+}
+
+.timer-orb.danger {
+  background: radial-gradient(circle, rgba(255, 91, 91, 0.34), rgba(255, 91, 91, 0.08));
+  border-color: rgba(255, 91, 91, 0.5);
+}
+
+.player-stage,
+.side-stack,
+.suggestion-list,
+.ledger-list,
+.squad-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.player-stage {
+  padding: 1.5rem;
+  border-radius: 24px;
+  background:
+    linear-gradient(160deg, rgba(255, 132, 56, 0.18), rgba(69, 208, 255, 0.05)),
+    rgba(4, 9, 20, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.metric-card,
+.suggestion-card,
+.ledger-item,
+.squad-item {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.metric-card {
+  padding: 1rem;
+  border-radius: 18px;
+}
+
+.metric-card span {
+  color: rgba(230, 238, 255, 0.68);
+  display: block;
+  font-size: 0.92rem;
+}
+
+.metric-card strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.5rem;
+  color: #fbfdff;
+}
+
+.metric-card.small {
+  min-width: 170px;
+}
+
+.pill,
+.role-chip,
+.tag-pill,
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 0.83rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(247, 250, 255, 0.88);
+}
+
+.pill,
+.role-chip,
+.status-chip {
+  padding: 0.45rem 0.8rem;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.pill.accent,
+.status-chip.success {
+  background: rgba(39, 208, 149, 0.18);
+  border-color: rgba(39, 208, 149, 0.34);
+}
+
+.status-chip.warning,
+.role-chip.alert {
+  background: rgba(255, 184, 76, 0.18);
+  border-color: rgba(255, 184, 76, 0.32);
+}
+
+.status-chip.danger {
+  background: rgba(255, 91, 91, 0.18);
+  border-color: rgba(255, 91, 91, 0.34);
+}
+
+.tag-pill {
+  padding: 0.35rem 0.7rem;
+  background: rgba(69, 208, 255, 0.12);
+}
+
+.bid-box,
+.glass-subpanel,
+.owner-card,
+.suggestion-card,
+.squad-column {
+  padding: 1.2rem;
+}
+
+.bid-box {
+  margin-top: 0.6rem;
+}
+
+.cta-row {
+  margin-top: 1.8rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.inline-field {
+  align-items: center;
+}
+
+.inline-field input {
+  flex: 1;
+}
+
+label {
+  display: grid;
+  gap: 0.55rem;
+  color: rgba(230, 238, 255, 0.8);
+  font-size: 0.95rem;
+}
+
+input {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(7, 13, 26, 0.75);
+  color: #f8fbff;
+  border-radius: 16px;
+  padding: 0.95rem 1rem;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: 2px solid rgba(255, 158, 84, 0.6);
+  outline-offset: 2px;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 16px;
+  font: inherit;
+  padding: 0.9rem 1.1rem;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease,
+    background 0.18s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.primary-button {
+  color: #1b1207;
+  background: linear-gradient(135deg, #ffd16f, #ff8e53);
+}
+
+.ghost-button {
+  color: #eef6ff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.toggle-row input {
+  width: auto;
+}
+
+.subtle-note,
+.owner-card p,
+.suggestion-card p,
+.ledger-item span,
+.squad-item span {
+  color: rgba(224, 231, 255, 0.66);
+}
+
+.suggestion-card,
+.ledger-item,
+.squad-item,
+.squad-column {
+  border-radius: 18px;
+}
+
+.ledger-item,
+.squad-item,
+.owner-stats > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.owner-stats > div {
+  flex-direction: column;
+}
+
+.owner-card.leading {
+  outline: 1px solid rgba(255, 176, 84, 0.5);
+  background: linear-gradient(145deg, rgba(33, 25, 11, 0.82), rgba(10, 16, 31, 0.74));
+}
+
+.sales-grid,
+.squad-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.squad-column {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.empty-stage {
+  min-height: 280px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+@media (max-width: 1080px) {
+  .stage-grid,
+  .bottom-grid,
+  .sales-grid,
+  .squad-columns,
+  .stats-grid,
+  .lobby-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-header,
+  .hero-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 720px) {
+  .lobby-shell,
+  .dashboard-shell {
+    padding: 1rem;
+  }
+
+  .lobby-card,
+  .hero-stage,
+  .owner-card,
+  .bottom-grid > .glass-panel {
+    padding: 1.1rem;
+    border-radius: 24px;
+  }
+
+  .bid-controls,
+  .cta-row,
+  .panel-header,
+  .inline-field {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .timer-orb {
+    width: 100px;
+  }
+}

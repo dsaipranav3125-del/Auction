@@ -298,7 +298,7 @@ app.get('/room-code', (_req, res) => {
 
 app.use(express.static(distDir))
 
-app.get('*', (req, res, next) => {
+app.use((req, res, next) => {
   if (req.path.startsWith('/socket.io')) {
     next()
     return

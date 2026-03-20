@@ -28,6 +28,7 @@ function App() {
   const [roomCode, setRoomCode] = useState('')
   const [ownerName, setOwnerName] = useState('')
   const [teamName, setTeamName] = useState('')
+  const [isJoining, setIsJoining] = useState(false)
   const [wantsAdmin, setWantsAdmin] = useState(true)
   const [session, setSession] = useState(null)
   const [roomState, setRoomState] = useState(null)
@@ -55,14 +56,17 @@ function App() {
 
     socket.on('connect', () => {
       setConnected(true)
+      setStatusMessage('Socket connected. Enter room details to join.')
     })
 
     socket.on('disconnect', () => {
       setConnected(false)
+      setIsJoining(false)
     })
 
     socket.on('connect_error', () => {
       setConnected(false)
+      setIsJoining(false)
       setStatusMessage('Cannot reach the auction server. Refresh after the backend is live.')
     })
 
@@ -112,22 +116,38 @@ function App() {
   }
 
   const joinRoom = () => {
-    if (!roomCode.trim() || !ownerName.trim() || !teamName.trim()) {
-      announce('Room code, owner name, and team name are required.')
+    if (!connected) {
+      announce('Socket is still connecting. Wait a moment and try again.')
       return
     }
+
+    if (!roomCode.trim() || !teamName.trim()) {
+      announce('Room code and team name are required.')
+      return
+    }
+
+    setIsJoining(true)
+    announce('Joining room...')
+
+    const timeoutId = setTimeout(() => {
+      setIsJoining(false)
+      announce('Join timed out. Refresh and try again.')
+    }, 7000)
 
     socket.emit(
       'join-room',
       {
         roomCode,
-        ownerName,
+        ownerName: ownerName.trim() || 'Owner',
         teamName,
         isAdmin: wantsAdmin,
       },
       (response) => {
+        clearTimeout(timeoutId)
+        setIsJoining(false)
+
         if (!response?.ok) {
-          announce('Unable to join room.')
+          announce(response?.message ?? 'Unable to join room.')
           return
         }
 
@@ -173,6 +193,8 @@ function App() {
       }
     : null
 
+  const joinDisabled = isJoining || !roomCode.trim() || !teamName.trim() || !connected
+
   return (
     <div className="app-shell">
       <div className="ambient ambient-left" />
@@ -217,7 +239,7 @@ function App() {
                 <input
                   value={ownerName}
                   onChange={(event) => setOwnerName(event.target.value)}
-                  placeholder="Aarav"
+                  placeholder="Optional"
                 />
               </label>
 
@@ -241,8 +263,13 @@ function App() {
             </div>
 
             <div className="cta-row">
-              <button type="button" className="primary-button" onClick={joinRoom}>
-                Enter auction room
+              <button
+                type="button"
+                className="primary-button"
+                onClick={joinRoom}
+                disabled={joinDisabled}
+              >
+                {isJoining ? 'Joining...' : 'Enter auction room'}
               </button>
               <span className={`status-chip ${getStatusTone(statusMessage)}`}>{statusMessage}</span>
             </div>
